@@ -31,8 +31,6 @@ for url in list_of_urls:
     
 
 sim = []
-
-
 for (i, a), (j, b) in itertools.combinations(enumerate(sities_text), 2):
     similarity = SequenceMatcher(None, a, b).ratio()
     sim.append((i, j, similarity))
