@@ -16,7 +16,7 @@ def test_compare_strings():
     assert len(ret) == v * (v - 1) / 2
 
 
-def test_convert_tuple_list_to_lists():
+def test_rotate_tuple_list():
     t1 = (1, 2, 'ala')
     t2 = (3, 4, 'kot')
     t3 = (5, 6, 'pies')

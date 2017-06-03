@@ -8,17 +8,12 @@ import numpy as np
 import logging
 import argparse
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 
 class NoResultExecption(Exception):
     pass
 
 
-jj = 'donald-trump-zlikwidowal-nasa'
-r = 'przygotował zamach na Putina'
-real = 'zamach w Kabulu'
+logger = logging.getLogger(__name__)
 
 
 def get_urls_from_search_engine(key_words, num_of_searches):
@@ -67,27 +62,29 @@ def rotate_tuple_list(list_of_tuples):
     values = zip(*list_of_tuples)
     x, y, z = values
     for xx, yy, zz in zip(x, y, z):
-        print('x: ', xx, ', y: ', yy, ', z: ', zz)
-    return values
+        text = 'x: {}, y: {}, z: {}'.format(xx, yy, zz)
+        logger.debug(text)
+    return (x, y, z)
+
+
+def filter_ones(x):
+    if x != 1.0:
+        return x
+    else:
+        return 0.0
 
 
 def plot3d(xpos, ypos, values, num_of_compared_texts):
     fig = plt.figure()
     ax1 = fig.add_subplot(111, projection='3d')
 
-    def filter_ones(x):
-        if x != 1.0:
-            return x
-        else:
-            return 0.0
-
     size = len(xpos)
-    logger.info('size {}'.format(size))
+    logger.debug('size {}'.format(size))
 
     zpos = np.zeros(size)
     dx = np.ones(size)
     dy = np.ones(size)
-    dz = list(map(filter_ones, values))
+    dz = values
 
     div = num_of_compared_texts
     colors = [(g/div, b/div, 1-(g+b)/2/div) for (g, b) in zip(xpos, ypos)]
@@ -99,16 +96,20 @@ def plot3d(xpos, ypos, values, num_of_compared_texts):
     plt.show()
 
 
-def make_analize(key_words, num_of_searches):
+def make_analize(key_words, num_of_searches=10):
     urls = get_urls_from_search_engine(key_words, num_of_searches)
     articles = download_article(urls)
     similar = compare_strings(articles)
-    max_similarity = max(similar[2])
-    values = rotate_tuple_list(similar)
-    plot3d(*values, len(articles))
+    x, y, val = rotate_tuple_list(similar)
+
+    val = list(map(filter_ones, val))
+    max_similarity = max(val)
+
+    plot3d(x, y, val, len(articles))
     return max_similarity
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
     parser.add_argument('key_words', type=str, default=jj,
                         help='key words to find article')
@@ -117,5 +118,6 @@ if __name__ == "__main__":
                         default=10, help=help)
     args = parser.parse_args()
 
-    make_analize(args.key_words, args.num_of_searches)
+    ret = make_analize(args.key_words, args.num_of_searches)
+    print('max similarity is {}'.format(ret))
 
