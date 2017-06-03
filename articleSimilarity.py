@@ -99,7 +99,7 @@ def plot3d(xpos, ypos, values, num_of_compared_texts):
     plt.show()
 
 
-def make_analize(key_words, num_of_searches):
+def make_analize(key_words, num_of_searches=10):
     urls = get_urls_from_search_engine(key_words, num_of_searches)
     articles = download_article(urls)
     similar = compare_strings(articles)
