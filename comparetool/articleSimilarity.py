@@ -108,6 +108,7 @@ def make_analize(key_words, num_of_searches=10):
     plot3d(x, y, val, len(articles))
     return max_similarity
 
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
@@ -120,4 +121,3 @@ if __name__ == "__main__":
 
     ret = make_analize(args.key_words, args.num_of_searches)
     print('max similarity is {}'.format(ret))
-

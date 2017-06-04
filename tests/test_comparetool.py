@@ -20,12 +20,11 @@ def test_rotate_tuple_list():
     t1 = (1, 2, 'ala')
     t2 = (3, 4, 'kot')
     t3 = (5, 6, 'pies')
-    l = [t1, t2, t3]
+    lis = [t1, t2, t3]
 
     expected = [(1, 3, 5), (2, 4, 6), ('ala', 'kot', 'pies')]
-    returned = comp.rotate_tuple_list(l)
+    returned = comp.rotate_tuple_list(lis)
 
     for ret, exp in zip(returned, expected):
         for r, e in zip(ret, exp):
             assert r == e
-
