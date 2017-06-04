@@ -112,7 +112,7 @@ def make_analize(key_words, num_of_searches=10):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
-    parser.add_argument('key_words', type=str, default=jj,
+    parser.add_argument('key_words', type=str,
                         help='key words to find article')
     help = 'Set numbers of articles to find in google search engine'
     parser.add_argument('--num_of_searches', '-n', type=int,
