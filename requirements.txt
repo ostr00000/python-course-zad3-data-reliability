@@ -1,0 +1,4 @@
+matplotlib
+numpy
+google
+newspaper3k
