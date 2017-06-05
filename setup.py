@@ -7,5 +7,10 @@ setup(name='comparetool',
       author='ostr00000',
       license='MIT',
       packages=['comparetool'],
-      install_requires=[matplotlib, numpy, google, newspaper3k],
+      install_requires=[
+            "matplotlib",
+            "numpy",
+            "google",
+            "newspaper3k"
+      ],
       zip_safe=False)
