@@ -3,7 +3,7 @@ from setuptools import setup
 setup(name='comparetool',
       version='1.0',
       description='compare artice on web',
-      url='https://github.com/AGHPythonCourse2017/zad3-ostr00000',
+      url='https://github.com/ostr00000/python-course-zad3-data-reliability',
       author='ostr00000',
       license='MIT',
       packages=['comparetool'],
